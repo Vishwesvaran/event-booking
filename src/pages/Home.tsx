@@ -48,7 +48,7 @@ const Home = () => {
     }
 
     const handleAddEvent = async ({ title, date, venue, availableSeats, }: Events) => {
-        const response = await addEvents({ title, date, venue, availableSeats })
+        await addEvents({ title, date, venue, availableSeats })
 
         toast.success('Event added successfully!')
 
