@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+*{
+    transition: all 200ms linear
+}
+
+button:active{
+    scale: .95;
+    transition: all 150ms linear;
+}
+
+
+
+@layer components {
+    .input-box {
+        @apply flex flex-col gap-2;
+
+        label{
+            @apply text-lg font-sans font-semibold
+        }
+        input{
+            @apply border border-gray-900/80 rounded-xl placeholder:text-gray-500 placeholder:font-medium placeholder:text-sm;
+        }
+    }
+}
+
