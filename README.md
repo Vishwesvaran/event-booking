@@ -1,73 +1,86 @@
-# React + TypeScript + Vite
+# 🎟️ Event Booking Web App (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **React + TypeScript** frontend for the **Event Booking Web App**, allowing users to **view**, **add**, **book**, and **delete** events through a connected backend API.
 
-Currently, two official plugins are available:
+This project demonstrates clean component architecture, form handling, state management, and API integration using Axios.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Event List:** Dynamically displays all available events (title, date, venue, available seats).  
+- **Add Event:** Form to create a new event with basic validation.  
+- **Book Event:** “Book Now” button to reduce available seats.  
+- **Delete Event:** Optional feature for removing events.  
+- **Real-Time Updates:** Reflects seat count immediately after booking.  
+- **Reusable Utilities:** Includes a clean date formatter utility.  
+- **Minimal, Clean UI:** Simple layout with responsive design.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧩 Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React (TypeScript)** – Core framework  
+- **Axios** – API communication  
+- **React Hooks & Context API** – State management  
+- **Tailwind CSS / CSS Modules** – Styling  
+- **Vite** – Lightning-fast development build tool  
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📁 Folder Structure
+
+```
+frontend/
+│
+├── src/
+│   ├── components/
+│   │   ├── EventList.tsx
+│   │   ├── EventCard.tsx
+│   │   ├── AddEventForm.tsx
+│   │   └── Navbar.tsx
+│   │
+│   ├── services/
+│   │   └── eventService.ts
+│   │
+│   ├── utils/
+│   │   └── formatDate.ts
+│   │
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+│
+├── package.json
+└── vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Setup Instructions
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1️⃣ Install Dependencies
+```bash
+npm install
 ```
+
+### 2️⃣ Configure Backend API URL
+Inside `src/services/eventService.ts`, set your backend API base URL:
+```ts
+const API_URL = "http://localhost:5000/api/events";
+```
+
+### 3️⃣ Run the App
+```bash
+npm run dev
+```
+
+App runs at:  
+👉 **http://localhost:5173**
+
+## 🧠 Future Enhancements
+- Search or filter events by title/date.
+- Display event details in a modal.
+- Add pagination or lazy loading.
+- Show toast notifications on success/error.
+
+
