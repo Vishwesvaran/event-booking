@@ -5,13 +5,14 @@ import { useEffect, useState } from "react"
 
 const Login = () => {
   const navigate = useNavigate()
-  const { isAuthenticated, login } = useAuth()
+  const { isAuthenticated, login,loginError } = useAuth()
   const [data, setData] = useState<LoginProps>({
     username: '',
     password: ''
   })
   const [errors, setErrors] = useState<{ username?: string; password?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+ 
 
   useEffect(() => {
     if (isAuthenticated) navigate("/");
@@ -36,10 +37,9 @@ const Login = () => {
 
     try {
       await login(data);
-    
     } catch (err) {
       console.error("Login failed:", err);
-      setErrors({ password: "Invalid username or password." });
+      setErrors({password:"Invalid Username or Password"})
     } finally {
       setIsSubmitting(false);
     }
@@ -50,6 +50,7 @@ const Login = () => {
     <section className="flex w-screen mt-15 items-center justify-center">
       <form onSubmit={submit} className="w-[30%] flex rounded-xl border-2 p-5 bg-white shadow-xl border-gray-500/20 flex-col gap-4 ">
         <h2 className="text-center text-2xl font-bold">Login</h2>
+        {loginError && (<span className="text-red-500  mt-1 text-center">{loginError}</span>)}
         <div className="input-box">
           <label htmlFor="username">Username:</label>
           <input type="text" id="username" name="username" placeholder="Enter Username"

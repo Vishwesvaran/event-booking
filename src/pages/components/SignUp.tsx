@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 
 const SignUp = () => {
   const navigate = useNavigate()
-  const { isAuthenticated, signUp } = useAuth()
+  const { isAuthenticated, signUp,loginError } = useAuth()
   const [data, setData] = useState<LoginProps>({
     username: '',
     password: ''
@@ -46,6 +46,7 @@ const SignUp = () => {
     <section className="flex w-screen mt-15 items-center justify-center">
       <form onSubmit={submit} className="w-[30%] flex rounded-xl border-2 p-5 bg-white shadow-xl border-gray-500/20 flex-col gap-4 ">
         <h2 className="text-center text-2xl font-bold">Sign Up</h2>
+        {loginError && (<span className="text-red-500  mt-1 text-center">{loginError}</span>)}
         <div className="input-box">
           <label htmlFor="username">Username:</label>
           <input type="text" id="username" name="username" placeholder="Enter Username"

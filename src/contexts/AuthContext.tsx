@@ -11,6 +11,7 @@ interface AuthContextType {
     signUp: (data: LoginProps) => Promise<void>;
     logout: () => Promise<void>;
     loading: boolean;
+    loginError: string,
 }
 
 const AuthContext = createContext<AuthContextType | null>(null)
@@ -19,6 +20,7 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [loginError, setLoginError] = useState("");
 
     useEffect(() => {
         const token = getAuthToken()
@@ -38,8 +40,9 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
             } else {
                 logout()
             }
-        } catch (error) {
+        } catch (error: any) {
             console.log(error)
+            logout()
         }
 
     }
@@ -56,8 +59,9 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
                 setAuthToken(response.data.data.token)
                 setIsAuthenticated(true)
             }
-        } catch (error) {
+        } catch (error:any) {
             console.log(error)
+            setLoginError(error?.response?.data?.error)
         }
     }
 
@@ -68,14 +72,14 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
                     'Content-Type': 'application/json',
                 },
             })
-
             if (response) {
                 setUser(response.data.data.user)
                 setAuthToken(response.data.data.token)
                 setIsAuthenticated(true)
             }
-        } catch (error) {
+        } catch (error: any) {
             console.log(error)
+            setLoginError(error?.response?.data?.error)
         }
     }
 
@@ -87,7 +91,7 @@ export const AuthProvider = ({ children }: { children: React.ReactElement }) => 
 
 
     return (
-        <AuthContext.Provider value={{ user, login, signUp, logout, loading, isAuthenticated }}>
+        <AuthContext.Provider value={{ user, login, signUp, logout, loading, isAuthenticated, loginError }}>
             {!loading && children}
         </AuthContext.Provider>
     )

@@ -44,7 +44,7 @@ export const addEvents = async ({
       venue,
       availableSeats,
     });
-
+    
     console.log(response)
   } catch (error) {
     console.log(error);
