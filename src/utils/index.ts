@@ -23,3 +23,5 @@ export const formatDate = (
     monthAndTime: monthAndTime,
   };
 };
+
+export const api_url = 'https://event-booking-backend-equf.onrender.com/api'

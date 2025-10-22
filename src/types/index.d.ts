@@ -4,3 +4,8 @@ export type Events = {
   date: string;
   availableSeats: number;
 };
+
+export type LoginProps = {
+  username:string,
+  password:string
+}

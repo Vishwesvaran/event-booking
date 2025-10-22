@@ -6,6 +6,7 @@ import { formatDate } from "../utils"
 import AddEventForm from "./components/AddEventForm"
 import type { Events } from "../types"
 import { toast } from "react-toastify"
+import { useAuth } from "../contexts/AuthContext"
 
 
 
@@ -14,7 +15,16 @@ const Home = () => {
     const [bookModal, setBookModal] = useState(false)
     const [bookData, setBookData] = useState<any>()
     const [addEventModal, setAddEventModal] = useState(false)
+    const { user } = useAuth();
 
+
+    useEffect(() => {
+        if(user) {
+            toast.info(`Logged in as ${user.username}`, {
+                autoClose:1000
+            })
+        }
+    }, [])
     const getAllEvents = async () => {
         const allEvents = await fetchEvents()
         if (allEvents.data) {
@@ -95,13 +105,13 @@ const Home = () => {
                     <h1 className="text-2xl font-semibold">
                         Upcoming Events:
                     </h1>
-                    <button className=" flex items-center px-5 w-fit rounded-xl gap-1 font-semibold text-xl text-white bg-blue-500 py-1 cursor-pointer" onClick={() => setAddEventModal(true)}>
+                    {user?.role === 'admin' && (<button className=" flex items-center px-5 w-fit rounded-xl gap-1 font-semibold text-xl text-white bg-blue-500 py-1 cursor-pointer hover:ring-4 ring-offset-2 ring-blue-400" onClick={() => setAddEventModal(true)}>
                         <Plus />
                         Add Event
-                    </button>
+                    </button>)}
                 </div>
                 <div className="flex gap-5 items-center pl-3 flex-wrap">
-                    {events.length >0 ?  events.map((eve: any, idx) => (
+                    {events.length > 0 ? events.map((eve: any, idx) => (
                         <EventCard currentEvent={eve} key={idx} onDelete={deleteEvent} onBook={bookEvent} />
                     )) : (
                         <div className="flex items-center justify-center py-10 w-full">
