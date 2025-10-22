@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { Events } from "../types";
 
-const apiUrl = "http://localhost:5500/api";
+const apiUrl = "https://event-booking-backend-equf.onrender.com/api";
 
 export const fetchEvents = async () => {
   try {
