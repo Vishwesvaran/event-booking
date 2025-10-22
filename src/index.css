@@ -9,10 +9,6 @@ button:active{
     transition: all 150ms linear;
 }
 
-input:focus{
-    border: none;
-    outline: none
-}
 
 
 

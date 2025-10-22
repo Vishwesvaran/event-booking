@@ -25,7 +25,7 @@ const Home = () => {
 
 
 
-    // Fetch all events from API
+
     const getAllEvents = async () => {
         try {
             const allEvents = await fetchEvents();
@@ -42,12 +42,11 @@ const Home = () => {
         getAllEvents();
     }, []);
 
-    // Show toast on login
     useEffect(() => {
         if (user) {
             toast.info(`Logged in as ${user.username}`, { autoClose: 1000 });
         }
-    }, [user]);
+    }, []);
 
 
     useEffect(() => {
@@ -127,6 +126,7 @@ const Home = () => {
     const bookEvent = async (id: string) => {
         const response = await bookSeats(id);
         setBookModal(true);
+        console.log(formatDate(response.data.date).fulldate)
         setBookData(response);
         getAllEvents();
         toast.success("Event Booked successfully!");
@@ -143,7 +143,7 @@ const Home = () => {
         <>
             {/* BOOKING MODAL */}
             {bookModal && (
-                <div className="flex absolute top-0 bottom-0 left-0 right-0 w-screen h-screen justify-center items-center bg-black/50">
+                <div className="flex absolute top-0 bottom-0 left-0 right-0 w-screen h-screen justify-center items-center bg-black/50 z-99">
                     <div className="flex flex-col bg-white shadow-md px-5 py-4 rounded-2xl min-w-[500px]">
                         <div className="flex gap-1 items-center justify-center">
                             <h1 className="text-xl font-medium self-center text-green-600">
@@ -171,8 +171,8 @@ const Home = () => {
                                 <div className="flex items-center gap-1">
                                     <Calendar />
                                     <p className="text-sm font-semibold">
-                                        {formatDate(bookData?.data?.dateTime)?.fulldate} -{" "}
-                                        {formatDate(bookData?.data?.dateTime)?.formattedTime}
+                                        {formatDate(bookData?.data?.date).fulldate} -{" "}
+                                        {formatDate(bookData?.data?.date).formattedTime}
                                     </p>
                                 </div>
                             </div>
@@ -183,7 +183,7 @@ const Home = () => {
 
             {/* ADD EVENT MODAL */}
             {addEventModal && (
-                <div className="flex absolute top-0 bottom-0 left-0 right-0 w-screen h-screen justify-center items-center bg-black/50">
+                <div className="flex absolute top-0 bottom-0 left-0 right-0 w-screen h-screen justify-center items-center bg-black/50 z-99">
                     <AddEventForm onAdd={handleAddEvent} closeModal={setAddEventModal} />
                 </div>
             )}
@@ -205,8 +205,8 @@ const Home = () => {
 
                 {/* SEARCH + FILTERS */}
                 <div className="flex flex-wrap items-center gap-8 w-full  rounded-xl justify-center py-4 bg-gray-100 mb-4">
-                    <div className="flex items-center relative min-w-100 border-2 border-gray-500 rounded-xl bg-white">
-                        <label htmlFor="search" className="absolute right-5">
+                    <div className="flex items-center relative min-w-100 border-2 border-gray-500 rounded-xl bg-white ">
+                        <label htmlFor="search" className="absolute z-0 right-5">
                             <Search />
                         </label>
                         <input
@@ -214,7 +214,7 @@ const Home = () => {
                             placeholder="Search by title or venue..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full py-2 px-4"
+                            className="w-full py-2 px-4 rounded-[inherit]"
                             name="search"
                             id="search"
                         />

@@ -26,7 +26,9 @@ export const bookSeats = async (id: string) => {
     const resposne = await axios.put(`${api_url}/events/${id}/book`);
     console.log(resposne.data);
     return resposne.data;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 export const addEvents = async ({
