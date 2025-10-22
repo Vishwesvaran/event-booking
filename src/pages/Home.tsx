@@ -260,7 +260,7 @@ const Home = () => {
                 </div>
 
                 {/* EVENT LIST */}
-                <div className="flex gap-5 items-center pl-3 flex-wrap">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-5 items-center pl-3 flex-wrap">
                     {filteredEvents.length > 0 ? (
                         filteredEvents.map((eve, idx) => (
                             <EventCard

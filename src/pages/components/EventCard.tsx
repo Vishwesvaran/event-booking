@@ -7,7 +7,7 @@ const EventCard = ({ currentEvent, onDelete, onBook }: { currentEvent: any, onDe
 
     const { user } = useAuth()
     return (
-        <div className="flex flex-col rounded-xl shadow-sm px-5 py-4 gap-2 ">
+        <div className="flex flex-col rounded-xl shadow-sm px-5 py-4 gap-2 min-h-[250px] h-auto">
             <div className="flex flex-col gap-2">
                 <h1 className="text-2xl font-semibold">{currentEvent.title}</h1>
                 <div className='flex  gap-1'>
@@ -23,7 +23,7 @@ const EventCard = ({ currentEvent, onDelete, onBook }: { currentEvent: any, onDe
                     <p className='font-medium text-lg'><span className='font-mono'>{currentEvent.availableSeats}</span> left </p>
                 </div>
             </div>
-            <div className='flex justify-between items-center w-full gap-5 mt-5'>
+            <div className='flex justify-between items-center w-full gap-5 mt-auto'>
                 {user ? (
                     <button className='px-4 py-2 font-semibold text-white bg-blue-500 rounded-xl cursor-pointer hover:ring-4 ring-offset-2 ring-blue-400' onClick={() => onBook(currentEvent._id)}>
                         Book Event
